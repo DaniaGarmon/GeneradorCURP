@@ -5,12 +5,10 @@ email: aspirante02_a26@cic.ipn.mx
 """
 
 #Variables
-continuar = True
 contador = 0
+continuar = True
 
 #Constantes
-Vocales = ['A','E','I','O','U']
-Cat_sexo = ['H','M','X']
 Cat_entidades = {
     "AGUASCALIENTES":"AS",
     "BAJA CALIFORNIA":"BC",
@@ -46,6 +44,8 @@ Cat_entidades = {
     "ZACATECAS":"ZS",
     "NACIDO EN EL EXTRANJERO":"NE"
 }
+Cat_sexo = ['H','M','X']
+Vocales = ['A','E','I','O','U']
 
 def seleccionar_estado_nacimiento():
   global Cat_entidades
@@ -62,6 +62,9 @@ def seleccionar_estado_nacimiento():
     return seleccionar_estado_nacimiento()
 
 def verificar_dia_nacimiento(dia, mes, anio):
+  """
+  Función para verificar que el día de nacimiento sea válido.
+  """
   g_30 = [4,6,9,11]
   g_31 = [1,3,5,7,8,10,12]
   if mes in g_30:
@@ -96,9 +99,10 @@ def verificar_dia_nacimiento(dia, mes, anio):
       else:
         return False
 
-
-
 def verificar_datos(dato,caso, mes=None, anio=None):
+  """
+  Función para verificar que los datos ingresados sean correctos.
+  """
   global contador
   match caso:
     case 1:
@@ -197,6 +201,9 @@ def verificar_datos(dato,caso, mes=None, anio=None):
         return verificar_datos(dato,6,mes,anio)
 
 def ingresar_fecha():
+  """
+  Función para ingresar la fecha de nacimiento del usuario.
+  """
   fecha_nacimiento = []
   anio = int(input('Ingresa el año de tu nacimiento: '))
   anio = verificar_datos(anio,4)
@@ -230,6 +237,9 @@ def seleccionar_sexo():
     return seleccionar_sexo()
       
 def ingresar_datos():
+    """
+    Función para que el usuario ingrese sus datos, y validar que sean correctos.
+    """
     nombre = input('Ingresa tu(s) nombre(s):')
     nombre = verificar_datos(nombre,1)
     if nombre is None:
@@ -258,6 +268,9 @@ def ingresar_datos():
     return datos_usuario
   
 def seleccionar_letras_apellido_p(apellido_p):
+  """
+  Función para selecionar las letras del apellido paterno que se van a usar en la CURP.
+  """
   global Vocales
   primer_letra = apellido_p[0]
   apellido_p = apellido_p[1:]
@@ -275,6 +288,9 @@ def seleccionar_letras_apellido_p(apellido_p):
   return letras_apellido_p
 
 def seleccionar_letras_apellido_m(apellido_m):
+  """
+  Función para selecionar las letras del apellido materno que se van a usar en la CURP.
+  """
   global Vocales
   if 'X' in apellido_m:
     return ['X','X']
@@ -288,6 +304,10 @@ def seleccionar_letras_apellido_m(apellido_m):
   return [primera_letra,primera_consonante]
 
 def checar_nombres_compuestos(nombre):
+  """
+  Función para evaluar si el nombre es compuesto.
+  En la CURP si el nombre es compuesto con María o José, se va a evaluar el otro nombre.
+  """
   nombres_compuestos_validar = ['MARÍA','MARIA','JOSE','JOSÉ']
   if ' ' in nombre:
     indice= nombre.index(' ')
@@ -301,6 +321,9 @@ def checar_nombres_compuestos(nombre):
     return nombre
 
 def seleccionar_letras_nombre(nombre):
+  """
+  Función para selecionar las letras del nombre que se van a usar en la CURP.
+  """
   global Vocales
   nombre = checar_nombres_compuestos(nombre)
   primera_letra = nombre[0]
@@ -313,6 +336,9 @@ def seleccionar_letras_nombre(nombre):
   return [primera_letra,consonante_interna]
 
 def verificar_palabra_altisonante(palabra):
+  """
+  Función para verificar que no se generar palabras curiosas/altisonantes al juntar los datos ingresados.
+  """
   palabras_reservadas = ['VACA','COLA','PENE','PUTO','MULA','JOTO','CACA','RATA']
   if palabra in palabras_reservadas:
     return True
@@ -320,6 +346,9 @@ def verificar_palabra_altisonante(palabra):
     return False
  
 def generar_curp():
+  """
+  Función para generar CURP a partir de los datos ingresados del usuario.
+  """
   print('¡Bienvenid@ al generador de CURP!')
   while continuar:
     datos_usuario= ingresar_datos()
