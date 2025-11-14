@@ -110,28 +110,59 @@ def verificar_datos(dato,caso, mes=None, anio=None):
             dato = input('Ingresa tu(s) nombre(s):')
             return verificar_datos(dato,1)
           else:
-            return None
-            
-            
+            return None        
     case 2:
         if len(dato) >=3:
+          contador = 0
           return dato.upper()
         else:
-          dato = input('Apellido no válido, intenta de nuevo:')
-          return verificar_datos(dato,2)
+          contador += 1
+          if contador == 1 or contador == 2:
+            dato = input('Apellido no válido, intenta de nuevo:')
+            return verificar_datos(dato,2)
+          else:
+            intentar = input('Apellido no válido. ¿Quieres volver a intentarlo? Escribe y/Y para continuar, de lo contrario escribe cualquier otra letra: ')
+            if intentar == 'Y' or intentar == 'y':
+              contador = 0
+              dato = input('Ingresa tu apellido paterno : ')
+              return verificar_datos(dato,2)
+            else:
+              return None 
     case 3:
         if len(dato) >=3 or dato == 'x' or dato == 'X':
+            contador = 0
             return dato.upper()
         else:
-            dato = input('Apellido no válido, intenta de nuevo. \nRecuerda en caso de no contar con este ingresa x:')
-            return verificar_datos(dato,3)
+            contador += 1
+            if contador == 1 or contador == 2:
+              dato = input('Apellido no válido, intenta de nuevo. \nRecuerda en caso de no contar con este ingresa x: ')
+              return verificar_datos(dato,3)
+            else:
+              intentar = input('Apellido no válido. ¿Quieres volver a intentarlo? Escribe y/Y para continuar, de lo contrario escribe cualquier otra letra: ')
+              if intentar == 'Y' or intentar == 'y':
+                contador = 0
+                dato = input('Ingresa tu apellido materno. \nRecuerda en caso de no contar con este ingresa x: ')
+                return verificar_datos(dato,3)
+              else:
+                return None 
     case 4:
       if 1900 <= dato <= 2025:
+        contador = 0
         return dato
       else:
-        print('Año no válido, intenta de nuevo:')
-        dato = int(input())
-        return verificar_datos(dato,4)
+        contador += 1
+        if contador == 1 or contador == 2:
+          print('Año no válido, intenta de nuevo:')
+          dato = int(input())
+          return verificar_datos(dato,4)
+        else:
+          intentar = input('Año de nacimiento no válido. ¿Quieres volver a intentarlo? Escribe y/Y para continuar, de lo contrario escribe cualquier otra letra: ')
+          if intentar == 'Y' or intentar == 'y':
+            contador = 0
+            dato = int(input('Ingresa tu año de nacimiento: '))
+            return verificar_datos(dato,4)
+          else:
+            return None   
     case 5:
       if 1 <= dato <= 12:
         if anio == 2025 and dato !=11 and dato !=12:
@@ -193,5 +224,7 @@ def generar_curp():
     if datos_usuario is None:
       print('Nos vemos a la próxima!!')
       break
+    print(datos_usuario)
+    break
 
 generar_curp()
