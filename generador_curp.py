@@ -3,7 +3,6 @@ Problema : Encontrar CURP de acuerdo a datos ingresados por el Usuario
 Autor: Dania Garcia Montiel
 email: aspirante02_a26@cic.ipn.mx
 """
-
 #Variables
 contador = 0
 continuar = True
@@ -240,15 +239,15 @@ def ingresar_datos():
     """
     Función para que el usuario ingrese sus datos, y validar que sean correctos.
     """
-    nombre = input('Ingresa tu(s) nombre(s):')
+    nombre = input('Ingresa tu(s) nombre(s) sin acentos:')
     nombre = verificar_datos(nombre,1)
     if nombre is None:
       return None
-    apellido_p = input('Ingresa tu primer apellido:')
+    apellido_p = input('Ingresa tu primer apellido sin acentos:')
     apellido_p = verificar_datos(apellido_p,2)
     if apellido_p is None:
       return None
-    appelido_m = input('Ingresa tu segundo apellido, en caso de no contar con este ingresa x:')
+    appelido_m = input('Ingresa tu segundo apellido, sin acentos, en caso de no contar con este ingresa x:')
     appelido_m = verificar_datos(appelido_m,3)
     if appelido_m is None:
       return None
